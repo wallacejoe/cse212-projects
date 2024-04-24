@@ -65,10 +65,23 @@ public static class ArraysTester {
         // of the list (index = 0). This method loops based on the "amount" number,
         // and is not the fastest option available. NOTE: insert comes before RemoveAt.
 
-        for (int i = 0; i < amount; i++) {
+        /*for (int i = 0; i < amount; i++) {
             data.Insert(0, data[^1]);
             data.RemoveAt(data.Count - 1);
-        }
+        }*/
+
+        // Another way of rotating the list would be to use the list range
+        // method. First off, you find the range by using the GetRange method
+        // and passing it the count of the list minus the amount variable
+        // as the first value, and the amount variable as the second value.
+        // You then use the same process but with the RemoveRange method to
+        // remove the rotating items. Finally, you take the newly created list
+        // and, using the InsertRange method, add the list to the beginning of
+        // the original list. The index value of InsertRange would be 0.
+
+        var newData = data.GetRange(data.Count - (amount), amount);
+        data.RemoveRange(data.Count - (amount), amount);
+        data.InsertRange(0, newData);
 
     }
 }
