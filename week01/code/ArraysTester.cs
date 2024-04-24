@@ -34,12 +34,20 @@ public static class ArraysTester {
     /// <returns>array of doubles that are the multiples of the supplied number</returns>
     private static double[] MultiplesOf(double number, int length)
     {
-        // TODO Problem 1 Start
-        // Remember: Using comments in your program, write down your process for solving this problem
-        // step by step before you write the code. The plan should be clear enough that it could
-        // be implemented by another person.
+        // The first step is to create a static array using the length variable
+        // to determine the arrays size. The array will be of type double. After
+        // its definition, the array should recieve values from a for loop. The
+        // for loop should run as many times as there is length, and each run should
+        // multiply the number variable according to the run number i.e. the first
+        // run mutiplies by one, the second by 2, and so on. Finally, these multiplied
+        // values are passed to the array, after which the updated array will be returned.
 
-        return new double[0]; // replace this return statement with your own
+        double[] result = new double[length];
+        for (int i = 0; i < length; i++) {
+            result[i] = number * (i + 1);
+        }
+
+        return result;
     }
     
     /// <summary>
@@ -52,10 +60,15 @@ public static class ArraysTester {
     /// </summary>
     private static void RotateListRight(List<int> data, int amount)
     {
-        // TODO Problem 2 Start
-        // Remember: Using comments in your program, write down your process for solving this problem
-        // step by step before you write the code. The plan should be clear enough that it could
-        // be implemented by another person.
+        // To "rotate" the list to the right, we can create a loop that removes
+        // the end of the list (index = list count - 1) and adds it to the beginning
+        // of the list (index = 0). This method loops based on the "amount" number,
+        // and is not the fastest option available. NOTE: insert comes before RemoveAt.
+
+        for (int i = 0; i < amount; i++) {
+            data.Insert(0, data[^1]);
+            data.RemoveAt(data.Count - 1);
+        }
 
     }
 }
