@@ -11,24 +11,60 @@ public class CustomerService {
         // Test Cases
 
         // Test 1
-        // Scenario: 
-        // Expected Result: 
+        // Scenario: Does the max size get defaulted to 10 if an invalid value is provided?
+        // Expected Result: It should display 10
         Console.WriteLine("Test 1");
-
-        // Defect(s) Found: 
+        var cs = new CustomerService(0);
+        Console.WriteLine($"Defaults to 10 if size is set to 0: {cs}");
+        // Defect(s) Found: None
 
         Console.WriteLine("=================");
 
         // Test 2
-        // Scenario: 
-        // Expected Result: 
+        // Scenario: Add and serve a customer
+        // Expected Result: Display the added customer
         Console.WriteLine("Test 2");
-
-        // Defect(s) Found: 
+        cs = new CustomerService(5);
+        cs.AddNewCustomer();
+        cs.ServeCustomer();
+        // Defect(s) Found: This found that the ServeCustomer should get the customer before deleting from the list
 
         Console.WriteLine("=================");
 
-        // Add more Test Cases As Needed Below
+        // Test 3
+        // Scenario: Successfully add and serve multiple customers
+        // Expected Result: Display the customers correctly
+        Console.WriteLine("Test 3");
+        cs = new CustomerService(6);
+        cs.AddNewCustomer();
+        cs.AddNewCustomer();
+        Console.WriteLine($"Before: {cs}");
+        cs.ServeCustomer();
+        cs.ServeCustomer();
+        Console.WriteLine($"After: {cs}");
+        // Defect(s) Found: none
+
+        Console.WriteLine("=================");
+
+        // Test 4
+        // Scenario: Does the max queue size get enforced?
+        // Expected Result: This should display some error message when the 2nd one is added
+        Console.WriteLine("Test 4");
+        cs = new CustomerService(1);
+        cs.AddNewCustomer();
+        cs.AddNewCustomer();
+        Console.WriteLine($"Service Queue: {cs}");
+        // Defect(s) Found: This found that I need to do >= instead of > in AddNewCustomer
+
+        Console.WriteLine("=================");
+
+        // Test 5
+        // Scenario: Serve a customer when there is none
+        // Expected Result: No Customers in the queue
+        Console.WriteLine("Test 5");
+        cs = new CustomerService(8);
+        cs.ServeCustomer();
+        // Defect(s) Found: This found that I need to check the length in serve_customer and display an error message
     }
 
     private readonly List<Customer> _queue = new();
@@ -67,7 +103,7 @@ public class CustomerService {
     /// </summary>
     private void AddNewCustomer() {
         // Verify there is room in the service queue
-        if (_queue.Count > _maxSize) {
+        if (_queue.Count >= _maxSize) {
             Console.WriteLine("Maximum Number of Customers in Queue.");
             return;
         }
@@ -88,9 +124,15 @@ public class CustomerService {
     /// Dequeue the next customer and display the information.
     /// </summary>
     private void ServeCustomer() {
-        _queue.RemoveAt(0);
-        var customer = _queue[0];
-        Console.WriteLine(customer);
+        if (_queue.Count <= 0)
+        {
+            Console.WriteLine("No Customers in the queue");
+        }
+        else {
+            var customer = _queue[0];
+            _queue.RemoveAt(0);
+            Console.WriteLine(customer);
+        }
     }
 
     /// <summary>

@@ -11,3 +11,4 @@
         return result;
     }
 }
+// returns the reverse of the entry i.e. "stressed" = "desserts"

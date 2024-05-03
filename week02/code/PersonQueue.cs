@@ -11,7 +11,10 @@ public class PersonQueue {
     /// </summary>
     /// <param name="person">The person to add</param>
     public void Enqueue(Person person) {
-        _queue.Insert(0, person);
+        _queue.Add(person);
+        // Previously: _queue.Insert(0, person);
+        // This added the person to the start of the list,
+        // when they should be added to the end.
     }
 
     public Person Dequeue() {

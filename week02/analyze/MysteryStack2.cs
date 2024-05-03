@@ -47,3 +47,5 @@
         return stack.Pop();
     }
 }
+// will transform a string into a basic equation.
+// if the string cannot be successfully transformed, will return an error.

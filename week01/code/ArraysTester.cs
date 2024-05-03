@@ -79,8 +79,8 @@ public static class ArraysTester {
         // and, using the InsertRange method, add the list to the beginning of
         // the original list. The index value of InsertRange would be 0.
 
-        var newData = data.GetRange(data.Count - (amount), amount);
-        data.RemoveRange(data.Count - (amount), amount);
+        var newData = data.GetRange(data.Count - amount, amount);
+        data.RemoveRange(data.Count - amount, amount);
         data.InsertRange(0, newData);
 
     }
