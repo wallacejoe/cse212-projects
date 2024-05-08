@@ -29,7 +29,16 @@ public class Maze {
     /// can't move, then display "Can't go that way!"
     /// </summary>
     public void MoveLeft() {
-        // FILL IN CODE
+        // Code should be mostly the same for each movement
+        // function. Check the corresponding variable within
+        // the array of the current xy key. If the variable is
+        // true, change current xy values; else display an error
+
+        if (_mazeMap[(_currX, _currY)][0] == true) {
+            _currX -= 1;
+        } else {
+            Console.WriteLine("Can't go that way!");
+        }
     }
 
     /// <summary>
@@ -37,7 +46,11 @@ public class Maze {
     /// can't move, then display "Can't go that way!"
     /// </summary>
     public void MoveRight() {
-        // FILL IN CODE
+        if (_mazeMap[(_currX, _currY)][1] == true) {
+            _currX += 1;
+        } else {
+            Console.WriteLine("Can't go that way!");
+        }
     }
 
     /// <summary>
@@ -45,7 +58,11 @@ public class Maze {
     /// can't move, then display "Can't go that way!"
     /// </summary>
     public void MoveUp() {
-        // FILL IN CODE
+        if (_mazeMap[(_currX, _currY)][2] == true) {
+            _currY -= 1;
+        } else {
+            Console.WriteLine("Can't go that way!");
+        }
     }
 
     /// <summary>
@@ -53,7 +70,11 @@ public class Maze {
     /// can't move, then display "Can't go that way!"
     /// </summary>
     public void MoveDown() {
-        // FILL IN CODE
+        if (_mazeMap[(_currX, _currY)][3] == true) {
+            _currY += 1;
+        } else {
+            Console.WriteLine("Can't go that way!");
+        }
     }
 
     public void ShowStatus() {

@@ -111,6 +111,23 @@ public static class SetsAndMapsTester {
         // To display the pair correctly use something like:
         // Console.WriteLine($"{word} & {pair}");
         // Each pair of words should displayed on its own line.
+        var set = new HashSet<string>(words);
+        foreach (string word in words) {
+            var stack = new Stack<char>();
+            foreach (char letter in word) {
+                stack.Push(letter);
+            }
+            string result = "";
+            while (stack.Count > 0) {
+                result += stack.Pop();
+            }
+            if (result != word) {
+                if (set.Contains(result)) {
+                    Console.WriteLine($"{word} & {result}");
+                }
+            }
+            set.Remove(word);
+        }
     }
 
     /// <summary>
@@ -131,7 +148,17 @@ public static class SetsAndMapsTester {
         var degrees = new Dictionary<string, int>();
         foreach (var line in File.ReadLines(filename)) {
             var fields = line.Split(",");
-            // Todo Problem 2 - ADD YOUR CODE HERE
+            // Getting the degrees is fairly easy, we simply add
+            // the current degree to the dictionary if it doesn't
+            // already exist. If the degree is already in the
+            // dictionary, we increase its value by one.
+            var degree = fields[3];
+            if (degrees.ContainsKey(degree)) {
+                degrees[degree] += 1;
+            }
+            else {
+                degrees[degree] = 1;
+            }
         }
 
         return degrees;
@@ -157,8 +184,32 @@ public static class SetsAndMapsTester {
     /// # Problem 3 #
     /// #############
     private static bool IsAnagram(string word1, string word2) {
-        // Todo Problem 3 - ADD YOUR CODE HERE
-        return false;
+        // First, we define the dictionary. Then, we split each
+        // string into its individual characters and store them
+        // in an array. We sort the array, then store it beneath
+        // its keyword. Finally, we check both values to see if
+        // they are equal. Return true, if equal. Else return false
+        var map = new Dictionary<string, char[]>();
+
+        var words1 = word1.Replace(" ", "").ToLower().ToArray();
+        Array.Sort(words1);
+        map[word1] = words1;
+
+        var words2 = word2.Replace(" ", "").ToLower().ToArray();
+        Array.Sort(words2);
+        map[word2] = words2;
+
+        if (map[word1].Length != map[word2].Length) {
+            return false;
+        }
+
+        for (int i = 0; i < words1.Count(); i++) {
+            if (map[word1][i] != map[word2][i]) {
+                return false;
+            }
+        }
+        
+        return true;
     }
 
     /// <summary>
@@ -234,6 +285,13 @@ public static class SetsAndMapsTester {
         // TODO:
         // 1. Add code in FeatureCollection.cs to describe the JSON using classes and properties 
         // on those classes so that the call to Deserialize above works properly.
-        // 2. Add code below to print out each place a earthquake has happened today and its magitude.
+        // 2. Add code below to print out each place a earthquake has happened today and its magnitude.
+
+        // Iterate through the list of data within the featureCollection
+        // and print the place and magnitude
+
+        foreach (var feature in featureCollection.Features) {
+            Console.WriteLine($"{feature.Properties.Place} - {feature.Properties.Mag}");
+        }
     }
 }

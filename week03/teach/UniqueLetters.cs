@@ -22,6 +22,20 @@
                     return false;
             }
         }
+        
+        
+        // Rather than looping through the list, you can save to
+        // a set. The set will automatically remove copies. Compare
+        // the length of the text to the size of the set. If the
+        // text is larger, it contains duplicates.
+        /*var set = new HashSet<char>();
+        for (var i = 0; i < text.Length; ++i) {
+            set.Add(text[i]);
+        }
+
+        if (set.Count < text.Length) {
+            return false;
+        }*/
 
         return true;
     }
